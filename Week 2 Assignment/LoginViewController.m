@@ -7,6 +7,11 @@
 //
 
 #import "LoginViewController.h"
+#import "FeedViewController.h"
+#import "RequestsViewController.h"
+#import "MessagesViewController.h"
+#import "NotificationsViewController.h"
+#import "MoreViewController.h"
 #import <HexColors/HexColor.h>
 
 @interface LoginViewController ()
@@ -16,17 +21,20 @@
 @property (weak, nonatomic) IBOutlet UIView *formWrapperView;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 @property (weak, nonatomic) IBOutlet UILabel *signUpLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
+
 @property float formWrapperViewYCoordinate;
 @property float signUpLabelYCoordinate;
 
-- (IBAction)onPasswordInputFieldEdit:(id)sender;
-- (IBAction)onEmailInputFieldEdit:(id)sender;
-
+- (IBAction)onEmailChange:(id)sender;
+- (IBAction)onPasswordChange:(id)sender;
 - (IBAction)onLogInButtonTap:(id)sender;
 - (IBAction)onViewTap:(id)sender;
 
 - (void)willShowKeyboard:(NSNotification *)notification;
 - (void)willHideKeyboard:(NSNotification *)notification;
+
+- (void)checkPassword;
 
 @end
 
@@ -52,10 +60,9 @@
     self.passwordInputField.secureTextEntry = YES;
     
     // Button setup
-    if ([self.passwordInputField.text isEqualToString:@""] && [self.emailInputField.text isEqualToString:@""]) {
-//        self.logInButton.userInteractionEnabled = NO;
-//        self.logInButton.layer.opacity = 0.5;
-    }
+    self.logInButton.userInteractionEnabled = NO;
+    self.logInButton.layer.opacity = 0.5;
+    [self.indicatorView stopAnimating];
     
     // Coordinate assignment
     self.formWrapperViewYCoordinate = self.formWrapperView.frame.origin.y;
@@ -68,7 +75,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)onPasswordInputFieldEdit:(id)sender {
+- (IBAction)onEmailChange:(id)sender {
     if (self.emailInputField.text.length > 0 && self.passwordInputField.text.length > 0) {
         self.logInButton.userInteractionEnabled = YES;
         self.logInButton.layer.opacity = 1;
@@ -78,7 +85,7 @@
     }
 }
 
-- (IBAction)onEmailInputFieldEdit:(id)sender {
+- (IBAction)onPasswordChange:(id)sender {
     if (self.emailInputField.text.length > 0 && self.passwordInputField.text.length > 0) {
         self.logInButton.userInteractionEnabled = YES;
         self.logInButton.layer.opacity = 1;
@@ -89,13 +96,9 @@
 }
 
 - (IBAction)onLogInButtonTap:(id)sender {
-    NSLog(@"hello");
-    if (self.emailInputField.text.length > 0 && [self.passwordInputField.text isEqualToString:@"password"]) {
-        
-    } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Incorrect Password" message:@"The password you entered is incorrect. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alertView show];
-    }
+    self.logInButton.titleLabel.text = @"Logging In";
+    [self.indicatorView startAnimating];
+    [self performSelector:@selector(checkPassword) withObject:nil afterDelay:2];
 }
 
 - (IBAction)onViewTap:(id)sender {
@@ -168,6 +171,39 @@
                      }
                      completion:nil];
     
+}
+
+- (void)checkPassword {
+    [self.indicatorView stopAnimating];
+    if (self.emailInputField.text.length > 0 && [self.passwordInputField.text isEqualToString:@"password"]) {
+        
+        FeedViewController *feedViewController = [[FeedViewController alloc] init];
+        feedViewController.title = @"News Feed";
+        UINavigationController *feedNavigationController = [[UINavigationController alloc] initWithRootViewController:feedViewController];
+        
+        RequestsViewController *requestViewController = [[RequestsViewController alloc] init];
+        requestViewController.title = @"Requests";
+        
+        MessagesViewController *messagesViewController = [[MessagesViewController alloc] init];
+        messagesViewController.title = @"Messages";
+        
+        NotificationsViewController *notificationViewController = [[NotificationsViewController alloc] init];
+        notificationViewController.title = @"Notifications";
+        
+        MoreViewController *moreViewController = [[MoreViewController alloc] init];
+        moreViewController.title = @"More";
+        UINavigationController *moreNavigationController = [[UINavigationController alloc] initWithRootViewController:moreViewController];
+        
+        UITabBarController *tabBarController = [[UITabBarController alloc] init];
+        tabBarController.viewControllers = @[feedNavigationController, requestViewController, messagesViewController, notificationViewController, moreNavigationController];
+        
+        [self presentViewController:tabBarController animated:YES completion:nil];
+        self.logInButton.titleLabel.text = @"Log In";
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Incorrect Password" message:@"The password you entered is incorrect. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+        self.logInButton.titleLabel.text = @"Log In";
+    }
 }
 
 @end

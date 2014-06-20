@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="emailInputField" destination="EDl-YR-KkH" id="qNf-yC-n7K"/>
                 <outlet property="formWrapperView" destination="ki9-8B-AJV" id="NJD-AA-GTt"/>
+                <outlet property="indicatorView" destination="ZJD-1i-oxo" id="qje-44-FjD"/>
                 <outlet property="logInButton" destination="qs0-Wl-xk7" id="wcr-1Z-iiS"/>
                 <outlet property="logoImageView" destination="5tl-bY-nIL" id="GXu-YG-PGX"/>
                 <outlet property="passwordInputField" destination="c4v-eo-Rde" id="sBk-iL-aqB"/>
@@ -56,7 +57,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
-                                                <action selector="onEmailInputFieldEdit:" destination="-1" eventType="valueChanged" id="Yrm-6a-RnQ"/>
+                                                <action selector="onEmailChange:" destination="-1" eventType="editingChanged" id="TB0-em-2A1"/>
                                             </connections>
                                         </textField>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c4v-eo-Rde">
@@ -65,7 +66,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
-                                                <action selector="onPasswordInputFieldEdit:" destination="-1" eventType="valueChanged" id="2sK-Jd-bYg"/>
+                                                <action selector="onPasswordChange:" destination="-1" eventType="editingChanged" id="M72-L8-hVi"/>
                                             </connections>
                                         </textField>
                                     </subviews>
@@ -75,6 +76,7 @@
                                     <rect key="frame" x="0.0" y="192" width="288" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.30980392156862746" green="0.41568627450980389" blue="0.63921568627450975" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <state key="normal" title="Log In">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -87,6 +89,10 @@
                                     <rect key="frame" x="57" y="19" width="174" height="43"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </imageView>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="ZJD-1i-oxo">
+                                    <rect key="frame" x="255" y="204" width="20" height="20"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </activityIndicatorView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
