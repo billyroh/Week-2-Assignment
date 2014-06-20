@@ -67,6 +67,13 @@
     // Coordinate assignment
     self.formWrapperViewYCoordinate = self.formWrapperView.frame.origin.y;
     self.signUpLabelYCoordinate = self.signUpLabel.frame.origin.y;
+    
+    // Status bar
+    [self setNeedsStatusBarAppearanceUpdate];
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)didReceiveMemoryWarning
@@ -180,19 +187,28 @@
         FeedViewController *feedViewController = [[FeedViewController alloc] init];
         feedViewController.title = @"News Feed";
         UINavigationController *feedNavigationController = [[UINavigationController alloc] initWithRootViewController:feedViewController];
+        feedNavigationController.navigationBar.barTintColor = [UIColor colorWithRed:(66.0f/255.0f) green:(98.0f/255.0f) blue:(163.0f/255.0f) alpha:1.0f];
+        feedNavigationController.navigationBar.translucent = NO;
+        feedNavigationController.tabBarItem.image = [UIImage imageNamed:@"feed-1"];
         
         RequestsViewController *requestViewController = [[RequestsViewController alloc] init];
         requestViewController.title = @"Requests";
+        requestViewController.tabBarItem.image = [UIImage imageNamed:@"friends"];
         
         MessagesViewController *messagesViewController = [[MessagesViewController alloc] init];
         messagesViewController.title = @"Messages";
+        messagesViewController.tabBarItem.image = [UIImage imageNamed:@"messages"];
         
         NotificationsViewController *notificationViewController = [[NotificationsViewController alloc] init];
         notificationViewController.title = @"Notifications";
+        notificationViewController.tabBarItem.image = [UIImage imageNamed:@"notifications"];
         
         MoreViewController *moreViewController = [[MoreViewController alloc] init];
         moreViewController.title = @"More";
         UINavigationController *moreNavigationController = [[UINavigationController alloc] initWithRootViewController:moreViewController];
+        moreNavigationController.navigationBar.barTintColor = [UIColor colorWithRed:(66.0f/255.0f) green:(98.0f/255.0f) blue:(163.0f/255.0f) alpha:1.0f];
+        moreNavigationController.navigationBar.translucent = NO;
+        moreViewController.tabBarItem.image = [UIImage imageNamed:@"more"];
         
         UITabBarController *tabBarController = [[UITabBarController alloc] init];
         tabBarController.viewControllers = @[feedNavigationController, requestViewController, messagesViewController, notificationViewController, moreNavigationController];
