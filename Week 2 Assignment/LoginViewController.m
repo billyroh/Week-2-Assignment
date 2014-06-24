@@ -70,6 +70,8 @@
     
     // Status bar
     [self setNeedsStatusBarAppearanceUpdate];
+    
+    [self.logInButton setTitle:@"Log In" forState:UIControlStateNormal];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
@@ -103,7 +105,7 @@
 }
 
 - (IBAction)onLogInButtonTap:(id)sender {
-    self.logInButton.titleLabel.text = @"Logging In";
+    [self.logInButton setTitle:@"Logging In" forState:UIControlStateNormal];
     [self.indicatorView startAnimating];
     [self performSelector:@selector(checkPassword) withObject:nil afterDelay:2];
 }
@@ -214,11 +216,10 @@
         tabBarController.viewControllers = @[feedNavigationController, requestViewController, messagesViewController, notificationViewController, moreNavigationController];
         
         [self presentViewController:tabBarController animated:YES completion:nil];
-        self.logInButton.titleLabel.text = @"Log In";
     } else {
+        [self.logInButton setTitle:@"Log In" forState:UIControlStateNormal];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Incorrect Password" message:@"The password you entered is incorrect. Please try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
-        self.logInButton.titleLabel.text = @"Log In";
     }
 }
 
