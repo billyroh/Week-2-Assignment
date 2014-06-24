@@ -1,6 +1,10 @@
 Week-2-Assignment
 =================
-# Facebook login page
+
+## How many hours did this take?
+4 hours (going to work on the engineering assignment to make up the rest of the 10 hours)
+
+## Facebook login page
 * Tapping in the UITextField repositions the elements, as shown in the screenshots.
 * Tapping anywhere dismisses the keyboard
 * If email and password field are both blank, button should be disabled.
@@ -14,7 +18,7 @@ Week-2-Assignment
 
 ![](http://cl.ly/image/0Z2h003l3d1d/validation.gif)
 
-# Facebook feed
+## Facebook feed
 * Navigation bar should have the search button and messages button.
 * Immediately after launch, display the loading indicator.
 * After 2 seconds, show the feed, which is a long image in a scrollable view.
